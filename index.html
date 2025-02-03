@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #ff4b6e;
+            margin-bottom: 2rem;
+        }
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #yesBtn {
+            background-color: #ff4b6e;
+            color: white;
+        }
+        #noBtn {
+            background-color: #gray;
+            position: relative;
+        }
+        .heart {
+            font-size: 5rem;
+            color: #ff4b6e;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .message {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: #666;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart">🤍</div>
+        <h1>Will You Be My Valentine?</h1>
+        <div class="message">Hi Jeremy, I've been wanting to ask you something special...</div>
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No</button>
+        </div>
+        <div id="responseMessage" class="message hidden"></div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const responseMessage = document.getElementById('responseMessage');
+        let noBtnClickCount = 0;
+
+        yesBtn.addEventListener('click', () => {
+            responseMessage.textContent = "i love you! 💖";
+            responseMessage.classList.remove('hidden');
+            noBtn.style.display = 'none';
+            yesBtn.style.display = 'none';
+        });
+
+        noBtn.addEventListener('mouseover', () => {
+            if (noBtnClickCount < 5) {
+                const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+                const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
+            }
+        });
+
+        noBtn.addEventListener('click', () => {
+            noBtnClickCount++;
+            if (noBtnClickCount >= 5) {
+                noBtn.style.position = 'static';
+                responseMessage.textContent = "Come on, you know you want to say yes! 😊";
+                responseMessage.classList.remove('hidden');
+            }
+        });
+
+        yesBtn.addEventListener('mouseover', () => {
+            yesBtn.style.transform = 'scale(1.1)';
+        });
+
+        yesBtn.addEventListener('mouseout', () => {
+            yesBtn.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>
